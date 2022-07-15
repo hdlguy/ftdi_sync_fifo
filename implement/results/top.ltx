@@ -10,11 +10,12 @@
                     {
                         "type": "XSDB_V3",
                         "name": "dbg_hub",
-                        "spec": "labtools_xsdbm_v3"
+                        "spec": "labtools_xsdbm_v3",
+                        "clk_input_freq_hz": "60002399"
                     },
                     {
                         "type": "ILA_V3",
-                        "name": "ftdi_ila_inst",
+                        "name": "ftdi_if_inst/ftdi_ila_inst",
                         "spec": "labtools_ila_v6",
                         "ipName": "ila",
                         "core_location": {
@@ -22,7 +23,7 @@
                             "slave_index": 0,
                             "bscan_switch_index": 0
                         },
-                        "uuid": "9EDA01D748AA580F8728EAE88D29E866",
+                        "uuid": "AB9705BC46295DB68EAFFDAC61F4A743",
                         "pins": [
                             {
                                 "name": "probe0",
@@ -35,32 +36,32 @@
                                 "portIndex": 0,
                                 "nets": [
                                     {
-                                        "name": "ftdi_count",
+                                        "name": "ftdi_if_inst/ila_data",
                                         "isBus": true,
                                         "subnets": [
                                             {
-                                                "name": "ftdi_count[7]"
+                                                "name": "ftdi_if_inst/ila_data[7]"
                                             },
                                             {
-                                                "name": "ftdi_count[6]"
+                                                "name": "ftdi_if_inst/ila_data[6]"
                                             },
                                             {
-                                                "name": "ftdi_count[5]"
+                                                "name": "ftdi_if_inst/ila_data[5]"
                                             },
                                             {
-                                                "name": "ftdi_count[4]"
+                                                "name": "ftdi_if_inst/ila_data[4]"
                                             },
                                             {
-                                                "name": "ftdi_count[3]"
+                                                "name": "ftdi_if_inst/ila_data[3]"
                                             },
                                             {
-                                                "name": "ftdi_count[2]"
+                                                "name": "ftdi_if_inst/ila_data[2]"
                                             },
                                             {
-                                                "name": "ftdi_count[1]"
+                                                "name": "ftdi_if_inst/ila_data[1]"
                                             },
                                             {
-                                                "name": "ftdi_count[0]"
+                                                "name": "ftdi_if_inst/ila_data[0]"
                                             }
                                         ]
                                     }
@@ -77,7 +78,7 @@
                                 "portIndex": 1,
                                 "nets": [
                                     {
-                                        "name": "ftdi_pwrsav_n_OBUF",
+                                        "name": "ftdi_if_inst/enz_7",
                                         "isBus": false
                                     }
                                 ]
@@ -93,7 +94,7 @@
                                 "portIndex": 1,
                                 "nets": [
                                     {
-                                        "name": "ftdi_oe_n_OBUF",
+                                        "name": "ftdi_if_inst/wr_n",
                                         "isBus": false
                                     }
                                 ]
@@ -109,7 +110,7 @@
                                 "portIndex": 1,
                                 "nets": [
                                     {
-                                        "name": "ftdi_siwu_n_OBUF",
+                                        "name": "ftdi_if_inst/rd_n",
                                         "isBus": false
                                     }
                                 ]
@@ -125,7 +126,7 @@
                                 "portIndex": 1,
                                 "nets": [
                                     {
-                                        "name": "ftdi_wr_n_OBUF",
+                                        "name": "ftdi_if_inst/txe_n",
                                         "isBus": false
                                     }
                                 ]
@@ -141,82 +142,8 @@
                                 "portIndex": 1,
                                 "nets": [
                                     {
-                                        "name": "ftdi_rd_n_OBUF",
+                                        "name": "ftdi_if_inst/rxf_n",
                                         "isBus": false
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "probe1",
-                                "id": 6,
-                                "type": "DATA_TRIGGER",
-                                "direction": "IN",
-                                "isVector": true,
-                                "leftIndex": 5,
-                                "rightIndex": 5,
-                                "portIndex": 1,
-                                "nets": [
-                                    {
-                                        "name": "ftdi_txe_n_IBUF",
-                                        "isBus": false
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "probe1",
-                                "id": 7,
-                                "type": "DATA_TRIGGER",
-                                "direction": "IN",
-                                "isVector": true,
-                                "leftIndex": 6,
-                                "rightIndex": 6,
-                                "portIndex": 1,
-                                "nets": [
-                                    {
-                                        "name": "ftdi_rxf_n_IBUF",
-                                        "isBus": false
-                                    }
-                                ]
-                            },
-                            {
-                                "name": "probe1",
-                                "id": 8,
-                                "type": "DATA_TRIGGER",
-                                "direction": "IN",
-                                "isVector": true,
-                                "leftIndex": 7,
-                                "rightIndex": 14,
-                                "portIndex": 1,
-                                "nets": [
-                                    {
-                                        "name": "ftdi_data_IBUF",
-                                        "isBus": true,
-                                        "subnets": [
-                                            {
-                                                "name": "ftdi_data_IBUF[7]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[6]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[5]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[4]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[3]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[2]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[1]"
-                                            },
-                                            {
-                                                "name": "ftdi_data_IBUF[0]"
-                                            }
-                                        ]
                                     }
                                 ]
                             }

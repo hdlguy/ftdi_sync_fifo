@@ -9,15 +9,19 @@ set_property part xc7a100ticsg324-1L [current_project]
 set_property target_language verilog [current_project]
 set_property default_lib work [current_project]
 
-read_ip ../source/ftdi_ila/ftdi_ila.xci
+read_ip ../source/ftdi_if/ftdi_ila/ftdi_ila.xci
 
 reset_target all [get_files *.xci]
 upgrade_ip -quiet  [get_ips *]
 generate_target {all} [get_ips *]
 
+read_verilog -sv ../source/ftdi_if/ftdi_if.sv
 read_verilog -sv ../source/top.sv
 
 read_xdc ../source/top.xdc  
+read_xdc ../source/pins.xdc  
+set_property used_in_synthesis FALSE [get_files ../source/pins.xdc]
+
 
 close_project
 
