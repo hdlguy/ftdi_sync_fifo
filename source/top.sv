@@ -26,6 +26,14 @@ module top (
     
     ftdi_ila ftdi_ila_inst (.clk(ftdi_clk), .probe0(ftdi_count), .probe1({ftdi_data, ftdi_rxf_n, ftdi_txe_n, ftdi_rd_n, ftdi_wr_n, ftdi_siwu_n, ftdi_oe_n, ftdi_pwrsav_n})); // 8, 15
 
+    logic ftdi_rx_dv_out, ftdi_tx_dv_in, ftdi_rx_rdy, ftdi_tx_rdy;
+    logic[7:0] ftdi_rx_dout, ftdi_tx_din;
+    ftdi_if ftdi_if_inst (
+        .clk(ftdi_clk), .rxf_n(ftdi_rxf_n), .rd_n(ftdi_rd_n), .oe_n(ftdi_oe_n), .txe_n(ftdi_txe_n), .wr_n(ftdi_wr_n),
+        .rx_dout(ftdi_rx_dout), .rx_dv_out(ftdi_rx_dv_out), .rx_rdy(ftdi_rx_rdy),
+        .tx_din (ftdi_tx_din),  .tx_dv_in (ftdi_tx_dv_in),  .tx_rdy(ftdi_tx_rdy)
+    );
+
 endmodule
 
 
