@@ -2,8 +2,7 @@ ALL_EXE = stream_test
 all: $(ALL_EXE) 
 
 CC=gcc
-CFLAGS=-Wall -I/home/pedro/github/libftdi/src/ -I/usr/include/libusb-1.0/ -I/home/pedro/github/libftdi/build/src/
-#LFLAGS=-L./lib
+CFLAGS=-Wall -I/home/pedro/github/libftdi/src/ -I/home/pedro/github/libftdi/build/src/ -I/usr/include/libusb-1.0/ 
 
 DEPS = Makefile
 
