@@ -2,13 +2,13 @@ ALL_EXE = stream_test
 all: $(ALL_EXE) 
 
 CC=gcc
-CFLAGS=-Wall -I/home/pedro/github/libftdi/src/ -I/home/pedro/github/libftdi/build/src/ -I/usr/include/libusb-1.0/ 
+CFLAGS=-Wall -I$(HOME)/github/libftdi/src/ -I$(HOME)/github/libftdi/build/src/ -I/usr/include/libusb-1.0/ 
 
 DEPS = Makefile
 
 # $@: target file name, $^: all prerequisites,  $<: first prerequisite
 
-VPATH=/home/pedro/github/libftdi/src/
+VPATH=$(HOME)/github/libftdi/src/
 
 stream_test: stream_test.o ftdi.o ftdi_stream.o
 	gcc -g -o $@ $^ -lm -lusb -lusb-1.0
