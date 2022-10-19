@@ -10,6 +10,7 @@ set_property target_language verilog [current_project]
 set_property default_lib work [current_project]
 
 read_ip ../source/ftdi_if/ftdi_ila/ftdi_ila.xci
+read_ip ../source/ftdi_if/ftdi_if_fifo/ftdi_if_fifo.xci
 
 reset_target all [get_files *.xci]
 upgrade_ip -quiet  [get_ips *]

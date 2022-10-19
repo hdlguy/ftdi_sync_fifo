@@ -1,6 +1,6 @@
 module ftdi_if (
     input   logic       ftdi_clk,
-    inout  logic[7:0]   data,
+    inout   logic[7:0]  data,
     input   logic       rxf_n,
     output  logic       rd_n,
     output  logic       oe_n,

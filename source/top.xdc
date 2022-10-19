@@ -28,6 +28,9 @@ set_output_delay -clock [get_clocks {ftdi_clk}] -max -add_delay $ftdi_out_maxdel
 set_output_delay -clock [get_clocks {ftdi_clk}] -min -add_delay $ftdi_out_mindel [get_ports {ftdi_rd_n}]
 set_output_delay -clock [get_clocks {ftdi_clk}] -max -add_delay $ftdi_out_maxdel [get_ports {ftdi_rd_n}]
 
+set_output_delay -clock [get_clocks {ftdi_clk}] -min -add_delay $ftdi_out_mindel [get_ports {ftdi_oe_n}]
+set_output_delay -clock [get_clocks {ftdi_clk}] -max -add_delay $ftdi_out_maxdel [get_ports {ftdi_oe_n}]
+
 
 
 set_property IOB TRUE [get_ports {ftdi_data[*]}]

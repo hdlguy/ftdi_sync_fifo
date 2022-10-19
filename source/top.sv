@@ -2,8 +2,7 @@
 module top (
     input   logic           clkin100,
     //
-    //(* IOB = "{TRUE}" *)
-    output  logic[7:0]      ftdi_data,
+    inout   logic[7:0]      ftdi_data,
     input   logic           ftdi_rxf_n,
     input   logic           ftdi_txe_n,
     output  logic           ftdi_rd_n,
@@ -21,19 +20,54 @@ module top (
     IBUF fclk_ibuf (.O(ftdi_clk_buf), .I(ftdi_clk));
     BUFR #(.BUFR_DIVIDE("BYPASS"), .SIM_DEVICE("7SERIES")) fclk_bufr (.O(fclk), .CE(CE), .CLR(CLR), .I(ftdi_clk_buf));
 
+    assign clk = clkin100;
+
     logic[7:0] ftdi_count;
     always_ff @(posedge fclk) begin
         ftdi_count <= ftdi_count + 1;
     end
     
 
-    logic ftdi_rx_dv_out, ftdi_tx_dv_in, ftdi_rx_rdy, ftdi_tx_rdy;
-    logic[7:0] ftdi_rx_dout, ftdi_tx_din;
+    logic tx_tvalid, tx_tready, rx_tvalid, rx_tready;
+    logic[7:0] rx_tdata, tx_tdata;
     ftdi_if ftdi_if_inst (
-        .clk(fclk), .data(ftdi_data), .rxf_n(ftdi_rxf_n), .rd_n(ftdi_rd_n), .oe_n(ftdi_oe_n), .txe_n(ftdi_txe_n), .wr_n(ftdi_wr_n),
-        .rx_dout(ftdi_rx_dout), .rx_dv_out(ftdi_rx_dv_out), .rx_rdy(ftdi_rx_rdy),
-        .tx_din (ftdi_tx_din),  .tx_dv_in (ftdi_tx_dv_in),  .tx_rdy(ftdi_tx_rdy)
+        .ftdi_clk(fclk), .data(ftdi_data), .rxf_n(ftdi_rxf_n), .rd_n(ftdi_rd_n), .oe_n(ftdi_oe_n), .txe_n(ftdi_txe_n), .wr_n(ftdi_wr_n),
+        .clk(clk), .tx_tdata(tx_tdata), .tx_tvalid(tx_tvalid), .tx_tready(tx_tready), 
+        .rx_tdata(rx_tdata), .rx_tvalid(rx_tvalid), .rx_tready(rx_tready)
     );
+
+
+    logic[7:0] tx_count=0;
+    always_ff @(posedge clk) begin
+        if (tx_tready == 1) tx_count <= tx_count + 1;
+    end
+    assign tx_tdata = tx_count;
+    assign tx_tvalid = 1;
+    
+    assign rx_tready = 1;
+
+    ftdi_ila if_ila (.clk(clk), .probe0({tx_tdata, tx_tvalid, tx_tready, rx_tdata, rx_tvalid, rx_tready})); // 20
 
 endmodule
 
+/*
+
+module ftdi_if (
+    input   logic       ftdi_clk,
+    inout  logic[7:0]   data,
+    input   logic       rxf_n,
+    output  logic       rd_n,
+    output  logic       oe_n,
+    input   logic       txe_n,
+    output  logic       wr_n,
+    //
+    input   logic       clk,
+    input   logic[7:0]  tx_tdata, 
+    input   logic       tx_tvalid, 
+    output  logic       tx_tready,
+    output  logic[7:0]  rx_tdata,
+    output  logic       rx_tvalid, 
+    input   logic       rx_tready 
+);
+
+*/
