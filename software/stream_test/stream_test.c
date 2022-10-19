@@ -30,17 +30,9 @@ static FILE *outputFile;
 
 static int check = 1;
 static int exitRequested = 0;
-/*
- * sigintHandler --
- *
- *    SIGINT handler, so we can gracefully exit when the user hits ctrl-C.
- */
 
-static void
-sigintHandler(int signum)
-{
-   exitRequested = 1;
-}
+// sigintHandler: SIGINT handler, so we can gracefully exit when the user hits ctrl-C.
+static void sigintHandler(int signum) { exitRequested = 1; }
 
 static void
 usage(const char *argv0)

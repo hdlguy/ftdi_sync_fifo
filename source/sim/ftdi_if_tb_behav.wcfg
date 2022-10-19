@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="ftdi_if_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="ftdi_if_tb" />
+            <top_module name="glbl" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="0.000 ns"></ZoomStartTime>
+      <ZoomEndTime time="2,000.000 ns"></ZoomEndTime>
+      <Cursor1Time time="0.000 ns"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="302"></NameColumnWidth>
+      <ValueColumnWidth column_width="74"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="40" />
+   <wvobject type="logic" fp_name="/ftdi_if_tb/ftdi_clk">
+      <obj_property name="ElementShortName">ftdi_clk</obj_property>
+      <obj_property name="ObjectShortName">ftdi_clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/data">
+      <obj_property name="ElementShortName">data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/rxf_n">
+      <obj_property name="ElementShortName">rxf_n</obj_property>
+      <obj_property name="ObjectShortName">rxf_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/rd_n">
+      <obj_property name="ElementShortName">rd_n</obj_property>
+      <obj_property name="ObjectShortName">rd_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/oe_n">
+      <obj_property name="ElementShortName">oe_n</obj_property>
+      <obj_property name="ObjectShortName">oe_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/txe_n">
+      <obj_property name="ElementShortName">txe_n</obj_property>
+      <obj_property name="ObjectShortName">txe_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/wr_n">
+      <obj_property name="ElementShortName">wr_n</obj_property>
+      <obj_property name="ObjectShortName">wr_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/tx_tdata">
+      <obj_property name="ElementShortName">tx_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_tdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/tx_tvalid">
+      <obj_property name="ElementShortName">tx_tvalid</obj_property>
+      <obj_property name="ObjectShortName">tx_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/tx_tready">
+      <obj_property name="ElementShortName">tx_tready</obj_property>
+      <obj_property name="ObjectShortName">tx_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/rx_tdata">
+      <obj_property name="ElementShortName">rx_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_tdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/rx_tvalid">
+      <obj_property name="ElementShortName">rx_tvalid</obj_property>
+      <obj_property name="ObjectShortName">rx_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/rx_tready">
+      <obj_property name="ElementShortName">rx_tready</obj_property>
+      <obj_property name="ObjectShortName">rx_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/tx_count">
+      <obj_property name="ElementShortName">tx_count[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_count[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="divider14" type="divider">
+      <obj_property name="label">uut</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/ftdi_clk">
+      <obj_property name="ElementShortName">ftdi_clk</obj_property>
+      <obj_property name="ObjectShortName">ftdi_clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/uut/data">
+      <obj_property name="ElementShortName">data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">data[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rxf_n">
+      <obj_property name="ElementShortName">rxf_n</obj_property>
+      <obj_property name="ObjectShortName">rxf_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rd_n">
+      <obj_property name="ElementShortName">rd_n</obj_property>
+      <obj_property name="ObjectShortName">rd_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/oe_n">
+      <obj_property name="ElementShortName">oe_n</obj_property>
+      <obj_property name="ObjectShortName">oe_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/txe_n">
+      <obj_property name="ElementShortName">txe_n</obj_property>
+      <obj_property name="ObjectShortName">txe_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/wr_n">
+      <obj_property name="ElementShortName">wr_n</obj_property>
+      <obj_property name="ObjectShortName">wr_n</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/clk">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/uut/tx_tdata">
+      <obj_property name="ElementShortName">tx_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_tdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/tx_tvalid">
+      <obj_property name="ElementShortName">tx_tvalid</obj_property>
+      <obj_property name="ObjectShortName">tx_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/tx_tready">
+      <obj_property name="ElementShortName">tx_tready</obj_property>
+      <obj_property name="ObjectShortName">tx_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/uut/rx_tdata">
+      <obj_property name="ElementShortName">rx_tdata[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_tdata[7:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rx_tvalid">
+      <obj_property name="ElementShortName">rx_tvalid</obj_property>
+      <obj_property name="ObjectShortName">rx_tvalid</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rx_tready">
+      <obj_property name="ElementShortName">rx_tready</obj_property>
+      <obj_property name="ObjectShortName">rx_tready</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/uut/state">
+      <obj_property name="ElementShortName">state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">state[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/uut/next_state">
+      <obj_property name="ElementShortName">next_state[3:0]</obj_property>
+      <obj_property name="ObjectShortName">next_state[3:0]</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/dtri">
+      <obj_property name="ElementShortName">dtri</obj_property>
+      <obj_property name="ObjectShortName">dtri</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rx_fifo_wr">
+      <obj_property name="ElementShortName">rx_fifo_wr</obj_property>
+      <obj_property name="ObjectShortName">rx_fifo_wr</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/tx_fifo_rd">
+      <obj_property name="ElementShortName">tx_fifo_rd</obj_property>
+      <obj_property name="ObjectShortName">tx_fifo_rd</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/tx_fifo_empty">
+      <obj_property name="ElementShortName">tx_fifo_empty</obj_property>
+      <obj_property name="ObjectShortName">tx_fifo_empty</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rx_fifo_empty">
+      <obj_property name="ElementShortName">rx_fifo_empty</obj_property>
+      <obj_property name="ObjectShortName">rx_fifo_empty</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/rx_fifo_full">
+      <obj_property name="ElementShortName">rx_fifo_full</obj_property>
+      <obj_property name="ObjectShortName">rx_fifo_full</obj_property>
+   </wvobject>
+   <wvobject type="logic" fp_name="/ftdi_if_tb/uut/tx_fifo_full">
+      <obj_property name="ElementShortName">tx_fifo_full</obj_property>
+      <obj_property name="ObjectShortName">tx_fifo_full</obj_property>
+   </wvobject>
+   <wvobject type="array" fp_name="/ftdi_if_tb/uut/tx_fifo_dout">
+      <obj_property name="ElementShortName">tx_fifo_dout[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_fifo_dout[7:0]</obj_property>
+   </wvobject>
+</wave_config>
