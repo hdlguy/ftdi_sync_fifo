@@ -14,24 +14,15 @@ module top (
 );
 
     assign ftdi_siwu_n = 1;
-    assign ftdi_pwrsav_n = 1;
-    
-    logic ftdi_clk_buf, fclk;
-    IBUF fclk_ibuf (.O(ftdi_clk_buf), .I(ftdi_clk));
-    BUFR #(.BUFR_DIVIDE("BYPASS"), .SIM_DEVICE("7SERIES")) fclk_bufr (.O(fclk), .CE(CE), .CLR(CLR), .I(ftdi_clk_buf));
+    assign ftdi_pwrsav_n = 1;    
 
     assign clk = clkin100;
-
-    logic[7:0] ftdi_count;
-    always_ff @(posedge fclk) begin
-        ftdi_count <= ftdi_count + 1;
-    end
     
 
     logic tx_tvalid, tx_tready, rx_tvalid, rx_tready;
     logic[7:0] rx_tdata, tx_tdata;
     ftdi_if ftdi_if_inst (
-        .ftdi_clk(fclk), .data(ftdi_data), .rxf_n(ftdi_rxf_n), .rd_n(ftdi_rd_n), .oe_n(ftdi_oe_n), .txe_n(ftdi_txe_n), .wr_n(ftdi_wr_n),
+        .ftdi_clk(ftdi_clk), .data(ftdi_data), .rxf_n(ftdi_rxf_n), .rd_n(ftdi_rd_n), .oe_n(ftdi_oe_n), .txe_n(ftdi_txe_n), .wr_n(ftdi_wr_n),
         .clk(clk), .tx_tdata(tx_tdata), .tx_tvalid(tx_tvalid), .tx_tready(tx_tready), 
         .rx_tdata(rx_tdata), .rx_tvalid(rx_tvalid), .rx_tready(rx_tready)
     );

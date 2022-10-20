@@ -4,6 +4,9 @@ create_clock -period 10.000 -name clk100 -waveform {0.000 8.333} [get_ports {clk
 
 create_clock -period 16.666 -name ftdi_clk -waveform {0.000 8.333} [get_ports {ftdi_clk}]
 
+#set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets ftdi_if_inst/fclk]
+#set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets -of [get_pins ftdi_if_inst/fclk_buf/O]]
+
 set ftdi_in_maxdel 7.15
 set ftdi_in_mindel 1.0
 set_input_delay -clock [get_clocks {ftdi_clk}] -min -add_delay $ftdi_in_mindel [get_ports {ftdi_data[*]}]
@@ -34,3 +37,6 @@ set_output_delay -clock [get_clocks {ftdi_clk}] -max -add_delay $ftdi_out_maxdel
 
 
 set_property IOB TRUE [get_ports {ftdi_data[*]}]
+set_property IOB TRUE [get_ports {ftdi_wr_n}]
+set_property IOB TRUE [get_ports {ftdi_rd_n}]
+set_property IOB TRUE [get_ports {ftdi_oe_n}]

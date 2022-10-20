@@ -1,33 +1,47 @@
+//
 module ftdi_if (
     input   logic       ftdi_clk,
     inout   logic[7:0]  data,
     input   logic       rxf_n,
-    output  logic       rd_n,
-    output  logic       oe_n,
+    output  logic       rd_n=1,
+    output  logic       oe_n=1,
     input   logic       txe_n,
-    output  logic       wr_n,
+    output  logic       wr_n=1,
     //
     input   logic       clk,
-    input   logic[7:0]  tx_tdata, 
-    input   logic       tx_tvalid, 
+    input   logic[7:0]  tx_tdata,
+    input   logic       tx_tvalid,
     output  logic       tx_tready,
     output  logic[7:0]  rx_tdata,
-    output  logic       rx_tvalid, 
-    input   logic       rx_tready 
+    output  logic       rx_tvalid,
+    input   logic       rx_tready
 );
 
+    //logic ftdi_clk_buf, fclk;
+    //IBUF fclk_ibuf (.O(ftdi_clk_buf), .I(ftdi_clk));
+    //BUFR #(.BUFR_DIVIDE("BYPASS"), .SIM_DEVICE("7SERIES")) fclk_buf (.O(fclk), .CE(1'b1), .CLR(1'b0), .I(ftdi_clk_buf));
+    //BUFG fclk_buf (.O(fclk), .I(ftdi_clk_buf));
+    
+    logic fclk;
+    ftdi_clk_wiz clk_wiz_inst (.clk_in1(ftdi_clk), .clk_out1(fclk));
+    
 
     logic[3:0] state=0, next_state;
-    logic dtri, rx_fifo_wr, tx_fifo_rd, tx_fifo_empty;
-    
+    logic rx_fifo_wr, tx_fifo_rd, tx_fifo_empty;
+    (* keep = "true" *) logic rd_n_pre;
+    (* keep = "true" *) logic wr_n_pre;
+    (* keep = "true" *) logic oe_n_pre;
+    (* keep = "true" *) logic dtri_pre;
+    (* keep = "true" *) logic [7:0] dtri=8'hff;
+    logic [7:0] data_int;
     always_comb begin
     
         // defaults
         next_state = state;
-        rd_n = 1;
-        wr_n = 1;
-        oe_n = 1;
-        dtri  = 1;
+        rd_n_pre = 1;
+        wr_n_pre = 1;
+        oe_n_pre = 1;
+        dtri_pre  = 1;
         rx_fifo_wr = 0;
         tx_fifo_rd = 0;   
         
@@ -40,21 +54,23 @@ module ftdi_if (
             1: begin
                 if (rxf_n == 0) begin
                     next_state = 2;
-                    oe_n = 0;
+                    oe_n_pre = 0;
+                    rd_n_pre = 0;
                 end else begin
                     if (txe_n == 0) begin
                         next_state = 5;
-                        dtri = 0;
+                        dtri_pre = 0;
+                        wr_n_pre = 0;
                     end
                 end
             end
             
             2: begin
-                oe_n = 0;
-                rd_n = 0;
                 if (rxf_n == 1) begin
                     next_state = 3;
                 end else begin
+                    oe_n_pre = 0;
+                    rd_n_pre = 0;
                     rx_fifo_wr = 1;
                 end
             end
@@ -64,11 +80,11 @@ module ftdi_if (
             end
             
             5: begin
-                dtri  = 0;
                 if ((txe_n == 1) || (tx_fifo_empty==1)) begin
                     next_state = 6;
                 end else begin
-                    wr_n = 0;
+                    dtri_pre = 0;
+                    wr_n_pre = 0;
                     tx_fifo_rd = 1;
                 end
             end
@@ -84,14 +100,19 @@ module ftdi_if (
         endcase
     end
        
-    always_ff @(posedge ftdi_clk) begin
+    always_ff @(posedge fclk) begin
         state <= next_state;
+        // these registers go in the IOB logic
+        oe_n <= oe_n_pre;
+        rd_n <= rd_n_pre;
+        wr_n <= wr_n_pre;
+        for (int i=0; i<8; i++) dtri[i] <= dtri_pre;
     end
 
     
     logic rx_fifo_empty, rx_fifo_full;
     ftdi_if_fifo rx_fifo (
-        .wr_clk(ftdi_clk),  .wr_en(rx_fifo_wr), .full(rx_fifo_full),    .din(data),      
+        .wr_clk(fclk),  .wr_en(rx_fifo_wr), .full(rx_fifo_full),    .din(data),      
         .rd_clk(clk),       .rd_en(rx_tready),  .empty(rx_fifo_empty),  .dout(rx_tdata)   
     );
     assign rx_tvalid = ~rx_fifo_empty;
@@ -101,12 +122,22 @@ module ftdi_if (
     logic[7:0] tx_fifo_dout;
     ftdi_if_fifo tx_fifo (
         .wr_clk(clk),       .wr_en(tx_tvalid),  .full(tx_fifo_full),    .din(tx_tdata),      
-        .rd_clk(ftdi_clk),  .rd_en(tx_fifo_rd), .empty(tx_fifo_empty),  .dout(tx_fifo_dout)   
+        .rd_clk(fclk),  .rd_en(tx_fifo_rd), .empty(tx_fifo_empty),  .dout(tx_fifo_dout)   
     );
     assign tx_tready = ~tx_fifo_full;
 
 
-    assign data = (dtri == 0) ? tx_fifo_dout : 8'bzzzz_zzzz;
+    // IOB registers
+    always_ff @(posedge fclk) if ((tx_fifo_rd==1) && (tx_fifo_empty==0)) data_int <= tx_fifo_dout;
+
+    assign data[0] = (dtri[0] == 0) ? data_int[0]: 1'bz;
+    assign data[1] = (dtri[1] == 0) ? data_int[1]: 1'bz;
+    assign data[2] = (dtri[2] == 0) ? data_int[2]: 1'bz;
+    assign data[3] = (dtri[3] == 0) ? data_int[3]: 1'bz;
+    assign data[4] = (dtri[4] == 0) ? data_int[4]: 1'bz;
+    assign data[5] = (dtri[5] == 0) ? data_int[5]: 1'bz;
+    assign data[6] = (dtri[6] == 0) ? data_int[6]: 1'bz;
+    assign data[7] = (dtri[7] == 0) ? data_int[7]: 1'bz;
     
 endmodule
 
