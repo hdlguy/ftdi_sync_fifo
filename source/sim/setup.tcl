@@ -8,6 +8,7 @@ set_property target_language Verilog [current_project]
 set_property default_lib work [current_project]
 
 read_ip ../ftdi_if/ftdi_if_fifo/ftdi_if_fifo.xci
+read_ip ../ftdi_if/ftdi_clk_wiz/ftdi_clk_wiz.xci
 upgrade_ip -quiet  [get_ips *]
 generate_target {all} [get_ips *]
 
